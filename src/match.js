@@ -6,7 +6,7 @@ const slugToKey = require( './slug-to-key' )
 
 const match = ( target, path ) =>
   parse( path ).map( slugToKey ).reduce(
-    ( match, slug ) => match[ slug ],
+    ( match, slug ) => is.undefined( match ) ? match : match[ slug ],
     target
   )
 

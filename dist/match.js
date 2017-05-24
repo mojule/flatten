@@ -6,7 +6,7 @@ var slugToKey = require('./slug-to-key');
 
 var match = function match(target, path) {
   return parse(path).map(slugToKey).reduce(function (match, slug) {
-    return match[slug];
+    return is.undefined(match) ? match : match[slug];
   }, target);
 };
 

@@ -109,4 +109,14 @@ describe( 'Flatten', () => {
 
     assert.equal( match, undefined )
   })
+
+
+  it( 'no match on array returns undefined', () => {
+    const a = [ [ [ 2 ] ] ]
+
+    assert( true )
+    const match = flatten.match( a, '[0][1][1]' )
+
+    assert.equal( match, undefined )
+  })
 })
