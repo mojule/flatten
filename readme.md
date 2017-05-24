@@ -47,6 +47,15 @@ const expanded = expand( flat )
 console.log( expanded )
 ```
 
+You can also require flatten, expand, match and parse on their own:
+
+```javascript
+const flatten = require( '@mojule/flatten/dist/flatten' )
+const expand = require( '@mojule/flatten/dist/expand' )
+const match = require( '@mojule/flatten/dist/match' )
+const parse = require( '@mojule/flatten/dist/parse' )
+```
+
 ## Usage
 
 Handles objects and arrays. Probably fails on property names that contain

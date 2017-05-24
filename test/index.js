@@ -6,8 +6,10 @@ const flatten = require( '../src' )
 const testJson = require( './fixtures/test.json' )
 
 describe( 'Flatten', () => {
-  it( 'flatterns', () => {
+  it( 'flattens', () => {
     const flat = flatten( testJson )
+
+    console.log( flat )
 
     assert( is.object( flat ) )
   })
@@ -37,5 +39,76 @@ describe( 'Flatten', () => {
     const expanded = flatten.expand( flat )
 
     assert.deepEqual( expanded, testJson )
+  })
+
+  it( 'expands to existing', () => {
+    const target = []
+
+    const flat = flatten( testJson )
+    const expanded = flatten.expand( flat, target )
+
+    assert.deepEqual( expanded, testJson )
+  })
+
+  it( 'expands object', () => {
+    const from = {
+      a: 1,
+      b: 2
+    }
+
+    const flat = flatten( from )
+    const expanded = flatten.expand( flat )
+
+    assert.deepEqual( expanded, from )
+  })
+
+  it( 'expands to existing object', () => {
+    const target = {
+      a: 1
+    }
+
+    const from = {
+      b: 2
+    }
+
+    const expect = {
+      a: 1,
+      b: 2
+    }
+
+    const flat = flatten( from )
+    const expanded = flatten.expand( flat, target )
+
+    assert.deepEqual( expanded, expect )
+  })
+
+  it( 'simple value', () => {
+    const flat = flatten( 1 )
+
+    assert.equal( flat, 1 )
+  })
+
+  it( 'bad object', () => {
+    const a = {}
+    const b = {}
+
+    a.b = b
+    b.a = a
+
+    assert.throws( () => flatten( a ) )
+  })
+
+  it( 'no match returns undefined', () => {
+    const a = {
+      b: {
+        c: {
+          d: 1
+        }
+      }
+    }
+
+    const match = flatten.match( a, '/b/c/d/e/f' )
+
+    assert.equal( match, undefined )
   })
 })
