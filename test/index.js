@@ -9,8 +9,6 @@ describe( 'Flatten', () => {
   it( 'flattens', () => {
     const flat = flatten( testJson )
 
-    console.log( flat )
-
     assert( is.object( flat ) )
   })
 
